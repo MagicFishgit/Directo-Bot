@@ -1,0 +1,17 @@
+<YeastarIPPhoneDirectory>
+    <DirectoryEntry>
+        <Name>test</Name>
+        <Telephone>2318</Telephone>
+        <Telephone>0786889677</Telephone>
+    </DirectoryEntry>
+    <DirectoryEntry>
+        <Name>Pixy</Name>
+        <Telephone>6222</Telephone>
+        <Telephone>37799801@192.168.9.144</Telephone>
+    </DirectoryEntry>
+    <DirectoryEntry>
+        <Name>Jin</Name>
+        <Telephone>6520</Telephone>
+        <Telephone>sip:7799802@192.168.9.144</Telephone>
+    </DirectoryEntry>
+</YeastarIPPhoneDirectory>

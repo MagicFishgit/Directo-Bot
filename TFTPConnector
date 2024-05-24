@@ -20,13 +20,13 @@ var client = tftp.createClient ({
 // });
 
 // Upload a file to the server
-const localFileToUpload = './RudiBackground1.png'; // Replace with the local file to upload
-const remoteFileToUpload = 'RudiBackground1.png'; // Replace with the desired remote file name
+const localFileToUpload = './Directory.xml'; // Replace with the local file to upload
+const remoteFileToUpload = 'Directory.xml'; // Replace with the desired remote file name
 client.put(localFileToUpload, remoteFileToUpload, (err) => {
   if (err) {
     console.error('Error uploading file:', err);
   } else {
     console.log(`File "${localFileToUpload}" uploaded as "${remoteFileToUpload}"`);
   }
-  client.end(); // Close the connection
+  client.end; // Close the connection
 });
