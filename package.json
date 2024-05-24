@@ -1,0 +1,22 @@
+{
+  "name": "directo-bot",
+  "version": "1.0.0",
+  "description": "Custom solution to automate a flaw in directory updates for Yeastar voip systems.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagicFishgit/Directo-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagicFishgit/Directo-Bot/issues"
+  },
+  "homepage": "https://github.com/MagicFishgit/Directo-Bot#readme",
+  "dependencies": {
+    "node-tftp": "^0.1.6"
+  }
+}
