@@ -1,11 +1,4 @@
-const tftp = require('node-tftp');
-
-// Create a TFTP client
-var client = tftp.createClient ({
-    host: "10.10.99.2",
-    port: 69
-  });
-
+import {client} from './TFTPConnector.js'
 // // Download a file from the server
 // const remoteFile = 'remotefile.txt'; 
 // // Replace with the actual remote file name
