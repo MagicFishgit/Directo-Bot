@@ -5,6 +5,7 @@ let refresh_token = '';
 //Authenticate and Connect to Yeastar API (P-Series)
 import {authenticateAndConnect, refreshToken, revokeToken} from './yeastarAPIConnector.js';
 import {getExtensionList, getExtensionDetails} from './yeastarAPI.js';
+import { groupByTitle, generateXML } from './xmlGenerator.js';
 
 // Your credentials
 const username = 'redacted';
@@ -43,7 +44,15 @@ async function main() {
 
         //Get details for ail extensions by id.
          const extension_details = await getExtensionDetails(access_token, baseUrl, extension_ids);
-         console.log(extension_details);
+         console.log(extension_details.data);
+
+        //Extract required values and group them in a hashmap by title.
+         let result = groupByTitle(extension_details.data);
+         console.log(result);
+
+        //Generate XML files according to title keys.
+        let filenames = generateXML(result);
+        console.log(filenames);
 
         
     } catch (error) {
