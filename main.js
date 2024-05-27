@@ -6,6 +6,7 @@ let refresh_token = '';
 import {authenticateAndConnect, refreshToken, revokeToken} from './yeastarAPIConnector.js';
 import {getExtensionList, getExtensionDetails} from './yeastarAPI.js';
 import { groupByTitle, generateXML } from './xmlGenerator.js';
+import { uploadFiles } from './TFTPWorker.js';
 
 // Your credentials
 const username = 'redacted';
@@ -51,8 +52,11 @@ async function main() {
          console.log(result);
 
         //Generate XML files according to title keys.
-        let filenames = generateXML(result);
-        console.log(filenames);
+         let filenames = await generateXML(result);
+         console.log(filenames);
+
+         // Usage:
+         uploadFiles(filenames);
 
         
     } catch (error) {
