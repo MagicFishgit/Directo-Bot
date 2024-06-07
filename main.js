@@ -13,7 +13,7 @@ const username = 'redacted';
 const password = 'redacted';
 
 // The base URL of your Yeastar P-Series PABX
-const baseUrl = 'redacted';
+const baseUrl = 'https://esahq.ras.yeastar.com:443';
 
 // Use the function
 async function main() {
