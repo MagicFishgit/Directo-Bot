@@ -4,8 +4,8 @@ let refresh_token = '';
 
 //Authenticate and Connect to Yeastar API (P-Series)
 import {authenticateAndConnect, refreshToken, revokeToken} from './yeastarAPIConnector.js';
-import {getExtensionList, getExtensionDetails} from './yeastarAPI.js';
-import { groupByTitle, generateXML } from './xmlGenerator.js';
+import {getExtensionList, getExtensionDetails, getExtensionsByOrganization} from './yeastarAPI.js';
+import { groupByOrganization, generateXML } from './xmlGenerator.js';
 import { uploadFiles } from './TFTPWorker.js';
 
 // Your credentials
@@ -47,11 +47,14 @@ async function main() {
          const extension_details = await getExtensionDetails(access_token, baseUrl, extension_ids);
          console.log(extension_details.data);
 
+        //Get list of organizations and their extensions.
+        const organization_list = await getExtensionsByOrganization(access_token, baseUrl);
+ 
         //Extract required values and group them in a hashmap by title.
-         let result = groupByTitle(extension_details.data);
+         let result = groupByOrganization(extension_details, organization_list);
          console.log(result);
 
-        //Generate XML files according to title keys.
+        //Generate XML files accordingu to title keys.
          let filenames = await generateXML(result);
          console.log(filenames);
 
