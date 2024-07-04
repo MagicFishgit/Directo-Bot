@@ -7,18 +7,6 @@ function groupByOrganization(extension_details, organization_list) {
     let grouped_org_data = {};
     let full_data = {};
 
-    // data.forEach(item => {
-    //     let title = item.title || 'untitled';
-    //     if (!groupedData[title]) {
-    //         groupedData[title] = [];
-    //     }
-    //     groupedData[title].push({
-    //         first_name: item.first_name || '',
-    //         last_name: item.last_name || '',
-    //         caller_id: item.caller_id || ''
-    //     });
-    // });
-
     //Group organization list into object with organization name and list of extensions.
     organization_list.organization_list[0].children.forEach( item => {
         let org_name = item.name;
@@ -46,9 +34,9 @@ function groupByOrganization(extension_details, organization_list) {
     
                 if (callerData) {
                     full_data[org_name].push({
-                        name: callerData.first_name,
-                        surname: callerData.last_name,
-                        callerId: callerData.caller_id
+                        first_name: callerData.first_name,
+                        last_name: callerData.last_name,
+                        caller_id: callerData.caller_id,
                     });
                 }
             }
@@ -60,35 +48,58 @@ function groupByOrganization(extension_details, organization_list) {
     return full_data;
 };
 
-function generateXML(data){
-
+async function generateXML(data) {
     let xml_file_names = [];
 
-        Object.keys(data).forEach((key) => {
-            let builder = new xml2js.Builder();
-            let xml = builder.buildObject({
-                YeastarIPPhoneDirectory: data[key].map((item) => ({
-                    DirectoryEntry: {
-                        Name: item.first_name + ' ' + item.last_name,
-                        Telephone: item.caller_id,
-                    },
-                })),
-            });
-
-            // Replace slashes in the file name
-            let fileName = `${key.replace(/\//g, '-')}.xml`;
-
-            //Add the xml file names to return array.
-            xml_file_names.push(fileName);
-
-            fs.writeFile(fileName, xml, (err) => {
-                if (err) throw err;
-                console.log(`File ${fileName}.xml has been saved!`);
-            });
+    for (let key of Object.keys(data)) {
+        let builder = new xml2js.Builder();
+        let xml = builder.buildObject({
+            YeastarIPPhoneDirectory: data[key].map((item) => ({
+                DirectoryEntry: {
+                    Name: item.first_name + ' ' + item.last_name,
+                    Telephone: item.caller_id,
+                },
+            })),
         });
 
-        //Return the array of file names.
-        return xml_file_names;
+        // Replace slashes in the file name
+        let fileName = `${key.replace(/\//g, '-')}.xml`;
+
+        // Add the xml file names to return array.
+        xml_file_names.push(fileName);
+
+        try {
+            await fs.promises.writeFile(fileName, xml);
+            console.log(`File ${fileName}.xml has been saved!`);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // Generate nested xml file from all file names.
+    let builder = new xml2js.Builder();
+    let YeastarIPPhoneMenu = {
+        Title: "Hertex Sites",
+        MenuItem: xml_file_names.map(name => (
+            {
+                Name: name,
+                URL: `tftp://10.10.99.2/${name}`
+            }
+        ))
+    };
+
+    let xml = builder.buildObject({YeastarIPPhoneMenu});
+    try {
+        await fs.promises.writeFile('YeastarNestedPhoneDirectory.xml', xml);
+        console.log('File YeastarNestedPhoneDirectory.xml has been saved!');
+    } catch (err) {
+        console.error(err);
+    }
+
+    xml_file_names.push('YeastarNestedPhoneDirectory.xml');
+
+    // Return the array of file names.
+    return xml_file_names;
 }
 
 //Export functions.
