@@ -12,8 +12,8 @@
  
  
  //Credentials
- const username = 'redacted';
- const password = 'redacted';
+ const username = 'b3qw7UoaygsvpF1fPvu4DgYphhtv5Mns';
+ const password = 'ZXBluD5X62TjhgQKkSTbHps3VWVjEVQJ';
  
  //The base URL of your Yeastar P-Series PABX
  const baseUrl = 'https://esahq.ras.yeastar.com:443';
