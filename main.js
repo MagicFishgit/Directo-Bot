@@ -6,19 +6,19 @@
  import {authenticateAndConnect, refreshToken, revokeToken} from './yeastarAPIConnector.js';
  import {getExtensionList, getExtensionDetails, getExtensionsByOrganization} from './yeastarAPI.js';
  import { groupByOrganization, generateXML } from './xmlGenerator.js';
- import { uploadFiles } from './httpsWorker.js';
- import { uploadTFTP } from './tftpWorker.js';
+ import { uploadFiles } from './httpsWorker.js'; //Import leftover for future development.
+ import { uploadTFTP } from './tftpWorker.js'; //Import leftover for future development.
  import { uploadFTP } from './ftpWorker.js';
  
  
- // Your credentials
- const username = 'redacted';
- const password = 'redacted';
+ //Credentials
+ const username = 'redactedd';
+ const password = 'redactedd';
  
- // The base URL of your Yeastar P-Series PABX
+ //The base URL of your Yeastar P-Series PABX
  const baseUrl = 'https://esahq.ras.yeastar.com:443';
  
- // Use the function
+ //Main function for execution logic. Calls relevant functions as needed.
  async function main() {
      try {
          //Authenticate to API and get Access Tokens.
@@ -41,34 +41,30 @@
          //Print Id's for fun.
          console.log(extension_ids);
  
-         //Refresh Access Token - KeepAlive
-         //let refreshed_session = await refreshToken(baseUrl, refresh_token);
-         //access_token = refreshed_session.access_token;
-         //refresh_token = refreshed_session.refresh_token;
- 
-         //Get details for ail extensions by id.
+         //Get details for all extensions by id.
           const extension_details = await getExtensionDetails(access_token, baseUrl, extension_ids);
           console.log(extension_details.data);
  
-         //Get list of organizations and their extensions.
+         //Get list of organizations and their extensions id.
          const organization_list = await getExtensionsByOrganization(access_token, baseUrl);
   
-         //Extract required values and group them in a hashmap by title.
+         //Extract required values and group them by matching id.
           let result = groupByOrganization(extension_details, organization_list);
           console.log(result);
  
-         //Generate XML files according to title keys.
+         //Generate XML files according to organization names.
           let filenames = await generateXML(result);
           console.log(filenames);
  
-          // Usage:
-         let upload = await uploadFTP(filenames);
+          //Upload xml files via FTP:
+          await uploadFTP(filenames);
  
          
      } catch (error) {
          console.error(error);
      }
  
+    //Revoke API access for the current session.
      let revoke_status = await revokeToken(baseUrl, access_token);
      console.log(revoke_status);
  }
