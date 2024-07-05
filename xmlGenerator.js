@@ -12,11 +12,11 @@ function groupByOrganization(extension_details, organization_list) {
         let org_name = item.name;
         let extension_list = item.ext_list;
         
-        //load grouped_org_data with empty object
+        //Load grouped_org_data with empty object
         if (!grouped_org_data[org_name]){
             grouped_org_data[org_name] = [];
         }
-        //push extensions onto array.
+        //Push extensions onto array.
         grouped_org_data[org_name].push(item.ext_list);
         console.log("GROUPGROUPGROUP");
         console.log(grouped_org_data);
@@ -82,7 +82,7 @@ async function generateXML(data) {
         Title: "Hertex Sites",
         MenuItem: xml_file_names.map(name => (
             {
-                Name: name,
+                Name: name.replace('.xml', ''), // remove .xml from the name
                 URL: `tftp://10.10.99.2/${name}`
             }
         ))
