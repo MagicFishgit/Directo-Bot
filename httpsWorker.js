@@ -9,7 +9,7 @@ file_names.forEach(fileName => {
 
   axios({
     method: 'post',
-    url: 'https://esahq.ras.yeastar.com/',
+    url: 'redacted',
     data: xmlData,
     headers: {'Content-Type': 'text/xml'}
   })
