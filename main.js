@@ -12,8 +12,8 @@
  
  
  //Credentials
- const username = 'REDACTED';
- const password = 'REDACTED';
+ const username = 'redacted';
+ const password = 'redacted';
  
  //The base URL of your Yeastar P-Series PABX
  const baseUrl = 'https://esahq.ras.yeastar.com:443';
@@ -57,7 +57,7 @@
           console.log(filenames);
  
           //Upload xml files via FTP:
-         let upload = await uploadFTP(filenames);
+          await uploadFTP(filenames);
  
          
      } catch (error) {
