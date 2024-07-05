@@ -18,7 +18,7 @@ function groupByOrganization(extension_details, organization_list) {
         }
         //Push extensions onto array.
         grouped_org_data[org_name].push(item.ext_list);
-        
+      
         console.log(grouped_org_data);
     });
 
