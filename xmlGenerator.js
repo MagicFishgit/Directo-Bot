@@ -10,14 +10,16 @@ function groupByOrganization(extension_details, organization_list) {
     //Group organization list into object with organization name and list of extensions.
     organization_list.organization_list[0].children.forEach( item => {
         let org_name = item.name;
-        let extension_list = item.ext_list;
         
         //Load grouped_org_data with empty object
         if (!grouped_org_data[org_name]){
             grouped_org_data[org_name] = [];
         }
+
         //Push extensions onto array.
-        grouped_org_data[org_name].push(item.ext_list);
+         if (item.ext_list){
+            grouped_org_data[org_name].push(item.ext_list);
+        }
       
         console.log(grouped_org_data);
     });
