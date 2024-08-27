@@ -11,9 +11,9 @@
  import { uploadFTP } from './ftpWorker.js';
  
  
- //Credentials
- const username = 'redactedd';
- const password = 'redactedd';
+ //Credentials - to be moved to .env for v2 of Directobot.
+ const username = 'redacted';
+ const password = 'redacted';
  
  //The base URL of your Yeastar P-Series PABX
  const baseUrl = 'https://esahq.ras.yeastar.com:443';
