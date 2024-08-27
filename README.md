@@ -66,6 +66,10 @@ Run the package.json using Node Package Manager (NPM). This will install the req
   npm install
 ```
 
+### Create .env file
+
+Create your .env file within the root directory of the program and enter the values.
+
 ### Build or not to build.
 
 There is no need to build the application as there is no user interface and it is relatively small and efficient.
