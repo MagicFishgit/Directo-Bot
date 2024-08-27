@@ -26,6 +26,21 @@ Yeastar System API Key and Secret.
 
 Organization Management enabled on the PABX and at least one subgroup created.
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`API_KEY` - Obtained from the Yeastar device API section after being enabled.
+
+`API_SECRET` - Obtained from the Yeastar device API section after being enabled.
+
+`BASE_URL` - https://your_pbx_fqdn.com:443
+
+`FTP_USER` - Obtained from Yeastar device Storage section after being enabled.
+
+`FTP_PASS` - OBtained from Yeastar device Storage section after being enabled.
+
+`HOST_ADDRESS` - local network IP address for physical pabx's replace with same value as `BASE_URL` if using cloud.
 # Deployment
 
 To deploy this project do the following steps:

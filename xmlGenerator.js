@@ -81,7 +81,7 @@ async function generateXML(data) {
     // Generate nested xml file from all file names.
     let builder = new xml2js.Builder();
     let YeastarIPPhoneMenu = {
-        Title: "Hertex Sites",
+        Title: "Sites",
         MenuItem: xml_file_names.map(name => (
             {
                 Name: name.replace('.xml', ''), // remove .xml from the name
